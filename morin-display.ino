@@ -5,28 +5,33 @@
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);           // select the pins used on the LCD panel
 
+int reading = 0;           //reading for distance sensor
+int distanceWarning = 100; //warning threashold in some measurement
 
-
-// define some values used by the panel and buttons
-int lcd_key     = 0;
-int adc_key_in  = 0;
-unsigned int timer       = 0;
-int reading = 0;                     //reading for distance sensor
-int distanceWarning = 100; //in some measurement
-
-
-int delay_time = 1000;           // The higher the number, the slower the timing.
+int delay_time = 3000;           // The higher the number the longer the messages are displayed.
 
 #define CHAR 17   //Number of characters per LCD line
 #define ROW  2    //Number of LCD rows
 
+//Congratulation messages comp
 char firstrun[][ROW][CHAR] =
 { {"Dr. rer. nat", "Morin Ostkmap"},
-  {"Es gratuliert", "Florian Alt :)"},
-  {"Es gratuliert", "Thore"}
+  {"Contribution C1", "STRIDEDDDDDDDD*!"},
+  {"Contribution C2", "Countermeasures!"},
+  {"Contribution C3", "IPED Toolkit!"},
+  {"Nil desperandum!", ""},
+  {"Es gratulieren:", "Thore & Ina"},
+  {"Es gratulieren:", "Dustin & Krissi"},
+  {"Es gratulieren:", "Holger & Steffi"},
+  {"Es gratulieren:", "Gwenny"},
+  {"Florian & Nigel", "sind Helden!11"},
+  {"I have every-", "thing to hide"},
+  {"NSA approved and", "monitored device"},
+  {"Annova <= 31", "Teilnehmern"},
+  {"Beloved UMUX", "SUS and NASA TLX"}
 };
 
-
+//Check http://omerk.github.io/lcdchargen/ & http://www.circuitbasics.com/how-to-set-up-an-lcd-display-on-an-arduino/ for custom chars 
 
 #define DHTPIN   2                   //PIN 2 for the DHT11
 #define DHTTYPE DHT11
@@ -38,34 +43,6 @@ char firstrun[][ROW][CHAR] =
 #define btnNONE   5
 
 DHT dht(DHTPIN, DHTTYPE);
-
-int read_LCD_buttons() {              // read the buttons
-  adc_key_in = analogRead(0);       // read the value from the sensor
-
-  // my buttons when read are centered at these valies: 0, 144, 329, 504, 741
-  // we add approx 50 to those values and check to see if we are close
-  // We make this the 1st option for speed reasons since it will be the most likely result
-
-  if (adc_key_in > 1000) return btnNONE;
-
-  // For V1.1 us this threshold
-  if (adc_key_in < 50)   return btnRIGHT;
-  if (adc_key_in < 250)  return btnUP;
-  if (adc_key_in < 450)  return btnDOWN;
-  if (adc_key_in < 650)  return btnLEFT;
-  if (adc_key_in < 850)  return btnSELECT;
-
-  // For V1.0 comment the other threshold and use the one below:
-  /*
-    if (adc_key_in < 50)   return btnRIGHT;
-    if (adc_key_in < 195)  return btnUP;
-    if (adc_key_in < 380)  return btnDOWN;
-    if (adc_key_in < 555)  return btnLEFT;
-    if (adc_key_in < 790)  return btnSELECT;
-  */
-
-  return btnNONE;                // when all others fail, return this.
-}
 
 void setup() {
   // lcd stuff
