@@ -6,7 +6,7 @@
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);           // select the pins used on the LCD panel
 
 int reading = 0;           //reading for distance sensor
-int distanceWarning = 50; //warning threashold in some measurement
+int distanceWarning = 45; //warning threashold in some measurement
 
 int delay_time = 3000;           // The higher the number the longer the messages are displayed.
 
@@ -65,14 +65,15 @@ void loop() {
 }
 
 void congratulationMessages()
-{   
+{  
+
    for (int i = 0; i <= sizeof(firstrun)/ sizeof(firstrun[0]); i++) {
         //Check distance to interrupt
         if(getDistance() <= distanceWarning)
         {
             //this is absurd but okay https://www.arduino.cc/en/Tutorial/StringAdditionOperator
             String level="Level "+ (String) getDistance();
-            writeToDisplay("Privacy Alert",level,3000);
+            writeToDisplay("Privacy Alert",level,700);
             lcd.noDisplay();
             delay(700);
             lcd.display();
@@ -86,6 +87,7 @@ void congratulationMessages()
             lcd.noDisplay();
             delay(700);
             lcd.display();
+            writeToDisplay("Privacy Alert",level,1000);
         }
         else {
              //As I don't know how to push to the array... well it works :P
