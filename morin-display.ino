@@ -6,7 +6,7 @@
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);           // select the pins used on the LCD panel
 
 int reading = 0;           //reading for distance sensor
-int distanceWarning = 100; //warning threashold in some measurement
+int distanceWarning = 50; //warning threashold in some measurement
 
 int delay_time = 3000;           // The higher the number the longer the messages are displayed.
 
@@ -15,20 +15,26 @@ int delay_time = 3000;           // The higher the number the longer the message
 
 //Congratulation messages comp
 char firstrun[][ROW][CHAR] =
-{ {"Dr. rer. nat", "Morin Ostkmap"},
-  {"Contribution C1", "STRIDEDDDDDDDD*!"},
+{ {"Dr. rer. nat.", "Morin Ostkmap"},
+  {"Designing ", "PPPPDS"},
+  {"Contribution C1", "STRIDED*!"},
   {"Contribution C2", "Countermeasures!"},
   {"Contribution C3", "IPED Toolkit!"},
   {"Nil desperandum!", ""},
+  {"Mr. 10", "publications...."},
+  {"453 Seiten", "ja, ne, is klar."},
   {"Es gratulieren:", "Thore & Ina"},
   {"Es gratulieren:", "Dustin & Krissi"},
   {"Es gratulieren:", "Holger & Steffi"},
   {"Es gratulieren:", "Gwenny"},
-  {"Florian & Nigel", "sind Helden!11"},
-  {"I have every-", "thing to hide"},
+  {"Florian & Nigel", "sind Helden!111!"},
+  {"I have every-", "thing to hide."},
   {"NSA approved and", "monitored device"},
-  {"Annova <= 31", "Teilnehmern"},
-  {"Beloved UMUX", "SUS and NASA TLX"}
+  {"Annova <= 31", "Teilnehmer"},
+  {"Beloved UMUX,", "SUS and NASA TLX"},
+  {"Multipleye =", "Augenkrebs"},
+  {"Morgen trink ich", "mit Euch!"}, 
+  {"The cake", "was a lie..."}
 };
 
 //Check http://omerk.github.io/lcdchargen/ & http://www.circuitbasics.com/how-to-set-up-an-lcd-display-on-an-arduino/ for custom chars 
@@ -61,20 +67,32 @@ void loop() {
 void congratulationMessages()
 {   
    for (int i = 0; i <= sizeof(firstrun)/ sizeof(firstrun[0]); i++) {
-        int distance = getDistance();
         //Check distance to interrupt
-        if(distance <= distanceWarning)
+        if(getDistance() <= distanceWarning)
         {
             //this is absurd but okay https://www.arduino.cc/en/Tutorial/StringAdditionOperator
-            String level="Level "+ (String) distance;
-            writeToDisplay("Privacy Alert",level);
+            String level="Level "+ (String) getDistance();
+            writeToDisplay("Privacy Alert",level,3000);
+            lcd.noDisplay();
+            delay(700);
+            lcd.display();
+            delay(700);
+            lcd.noDisplay();
+            delay(700);
+            lcd.display();
+            delay(700);
+            lcd.display();
+            delay(700);
+            lcd.noDisplay();
+            delay(700);
+            lcd.display();
         }
         else {
              //As I don't know how to push to the array... well it works :P
              if(i==sizeof(firstrun)/ sizeof(firstrun[0])) {
              ambient();
              }
-             //if nothing is there display
+             //if nothing is there display the congrat messages
              else {
              lcdWrite(firstrun[i][0], firstrun[i][1]);
            }
@@ -83,7 +101,7 @@ void congratulationMessages()
   return;
 }
 
-void writeToDisplay(String line1,String line2)
+void writeToDisplay(String line1,String line2, int delay_time)
 {
       lcd.clear();
       lcd.print(line1);
@@ -108,12 +126,13 @@ void ambient(){
   String tmp = "Temp. "+(String) getTemp()+(char)223;
   String humidity = " RH "+(String) getHumid()+"%";
   String complete = tmp+humidity;
-  writeToDisplay("Rinsomat 3000",complete);
+  writeToDisplay("Rinsomat 3000",complete, delay_time);
+  return;
 }
 
 //Write two lines, delay and clear display
 void lcdWrite(char line1[], char line2[]) {
-  writeToDisplay(line1,line2);
+  writeToDisplay(line1,line2, delay_time);
   return;
 }
 
