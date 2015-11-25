@@ -15,7 +15,7 @@ int delay_time = 3000;           // The higher the number the longer the message
 
 //Congratulation messages comp
 char firstrun[][ROW][CHAR] =
-{ {"Dr. rer. nat.", "Morin Ostkmap"},
+{ {"Dr. rer. nat.", "Morin Ostkamp"},
   {"Designing ", "PPPPDS"},
   {"Contribution C1", "STRIDED*!"},
   {"Contribution C2", "Countermeasures!"},
