@@ -34,7 +34,14 @@ char firstrun[][ROW][CHAR] =
   {"Beloved UMUX,", "SUS and NASA TLX"},
   {"Multipleye =", "Augenkrebs"},
   {"Morgen trink ich", "mit Euch!"}, 
-  {"The cake", "was a lie..."}
+  {"The cake", "was a lie..."},
+  {"Principle #7", "Agile Manifesto"},
+  {"Fork me on", "git.io/vB2vr"},
+  {"We are", "[pleased/sorry]"},
+  {"Sei Epislon < 0", ""},
+  {"Good Job,", "tall guy!"},
+  {"Congrats Morin!","Best wishes!"},
+  {"May your dreams","come true."} 
 };
 
 //Check http://omerk.github.io/lcdchargen/ & http://www.circuitbasics.com/how-to-set-up-an-lcd-display-on-an-arduino/ for custom chars 
