@@ -8,7 +8,7 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);           // select the pins used on the LC
 int reading = 0;           //reading for distance sensor
 int distanceWarning = 45; //warning threashold in some measurement
 
-int delay_time = 3000;           // The higher the number the longer the messages are displayed.
+int delay_time = 5000;           // The higher the number the longer the messages are displayed.
 
 #define CHAR 17   //Number of characters per LCD line
 #define ROW  2    //Number of LCD rows
@@ -30,7 +30,7 @@ char firstrun[][ROW][CHAR] =
   {"Florian & Nigel", "sind Helden!111!"},
   {"I have every-", "thing to hide."},
   {"NSA approved and", "monitored device"},
-  {"Annova <= 31", "Teilnehmer"},
+  {"Annova <= 20", "Teilnehmer"},
   {"Beloved UMUX,", "SUS and NASA TLX"},
   {"Multipleye =", "Augenkrebs"},
   {"Morgen trink ich", "mit Euch!"}, 
@@ -41,7 +41,8 @@ char firstrun[][ROW][CHAR] =
   {"Sei Epislon < 0", ""},
   {"Good Job,", "tall guy!"},
   {"Congrats Morin!","Best wishes!"},
-  {"May your dreams","come true."} 
+  {"May your dreams","come true."},
+  {"Come closer and","I will tell"}  
 };
 
 //Check http://omerk.github.io/lcdchargen/ & http://www.circuitbasics.com/how-to-set-up-an-lcd-display-on-an-arduino/ for custom chars 
